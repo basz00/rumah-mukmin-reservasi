@@ -1,0 +1,39 @@
+import { DateTime } from "luxon";
+import { CreateReservation } from "../../common/entities";
+import { ReservationFormData } from "../entity/reservation";
+
+export const mapToReservation = (
+  formData: ReservationFormData
+): CreateReservation => {
+  const reservationDatetime =
+    DateTime.fromISO(
+      `${formData.reservationDate}T${formData.reservationTime}`,
+      { zone: "Asia/Jakarta" }
+    )
+      .toUTC()
+      .toISO() ?? "";
+
+  const optionalDatetime =
+    DateTime.fromISO(`${formData.optionalDate}T${formData.optionalTime}`, {
+      zone: "Asia/Jakarta",
+    })
+      .toUTC()
+      .toISO() ?? "";
+  return {
+    name: formData.name,
+    age: parseInt(formData.age),
+    domicile: formData.address,
+    complaint: formData.complaint,
+    therapyExperience: formData.therapyExperience,
+    email: formData.email,
+    gender: formData.gender,
+    registrationCategory: formData.registrationCategory,
+    accompanyingParticipantName: formData.accompanyingParticipantName,
+    accompanyingParticipantComplaint: formData.accompanyingParticipantComplaint,
+    referredBy: formData.referredBy,
+    reservationServices: formData.reservationServices,
+    reservationDatetime,
+    optionalDatetime,
+    phoneNumber: formData.phoneNumber,
+  };
+};
