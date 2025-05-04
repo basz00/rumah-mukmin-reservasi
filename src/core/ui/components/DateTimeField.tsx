@@ -1,8 +1,7 @@
+import { DateTime } from "luxon";
 import styled from "styled-components";
 import Field from "./Field";
-import DatePicker from "./DatePicker";
-import TimePicker from "./TimePicker";
-import { DateTime } from "luxon";
+import Input from "./Input";
 
 const DateTimeContainer = styled.div`
   display: flex;
@@ -15,35 +14,27 @@ type Props = {
   label?: string;
   hint?: string;
   required?: boolean;
-  datePickerProps?: React.InputHTMLAttributes<HTMLInputElement> & {
-    error?: string;
-  };
-  timePickerProps?: React.InputHTMLAttributes<HTMLInputElement> & {
-    error?: string;
-  };
-};
+  error?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
-const DateTimeField = ({
-  label,
-  hint,
-  required,
-  datePickerProps,
-  timePickerProps,
-}: Props) => {
-  const error = datePickerProps?.error || timePickerProps?.error;
-  const isDateError = datePickerProps?.error !== undefined;
-  const isTimeError = timePickerProps?.error !== undefined;
-  const todayDate = DateTime.now().toFormat("yyyy-MM-dd");
-
+const DateTimeField = ({ label, hint, required, error, ...rest }: Props) => {
+  const hasError = !!error;
+  const todayDate = DateTime.now().toUTC().toFormat("yyyy-MM-dd'T'HH:mm");
   return (
     <Field label={label} hint={hint} error={error} required={required}>
       <DateTimeContainer>
-        <DatePicker
-          hasError={isDateError}
-          {...datePickerProps}
+        <Input
+          type="datetime-local"
+          onFocus={(e) => e.target.showPicker && e.target.showPicker()}
+          onClick={(e) => {
+            if (e.target instanceof HTMLInputElement && e.target.showPicker) {
+              e.target.showPicker();
+            }
+          }}
+          {...rest}
           min={todayDate}
+          hasError={hasError}
         />
-        <TimePicker hasError={isTimeError} {...timePickerProps} />
       </DateTimeContainer>
     </Field>
   );

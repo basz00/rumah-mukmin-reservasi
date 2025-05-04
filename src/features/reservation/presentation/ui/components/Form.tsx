@@ -74,7 +74,15 @@ const Form = () => {
   return (
     <StyledForm
       onSubmit={handleSubmit((data) => {
+        console.log(
+          `ori: rdt[${data.reservationDatetime}]} odt[${data.optionalDatetime}]`
+        );
         execute(mapToReservation(data));
+        console.log(
+          `new: rdt[${mapToReservation(data).reservationDatetime}]} odt[${
+            mapToReservation(data).optionalDatetime
+          }]`
+        );
       })}
     >
       <TextInputField
@@ -232,33 +240,16 @@ const Form = () => {
       <DateTimeField
         label="Waktu reservasi permintaan"
         hint="jam kerja aktif 08.00 - 17.00 Senin - Ahad, Rabu Libur(Kecuali Tanggal Sunnah)"
-        required={
-          checkIsRequired("reservationDate") ||
-          checkIsRequired("reservationTime")
-        }
-        datePickerProps={{
-          ...register("reservationDate"),
-          error: errors.reservationDate?.message,
-        }}
-        timePickerProps={{
-          ...register("reservationTime"),
-          error: errors.reservationTime?.message,
-        }}
+        required={checkIsRequired("reservationDatetime")}
+        error={errors.reservationDatetime?.message}
+        {...register("reservationDatetime")}
       />
       <DateTimeField
         label="Waktu optional lain"
         hint="(jika Pilihan saya telah di booked orang lain - jam kerja) tuliskan jam lain pada kolom diatas, terima kasih"
-        required={
-          checkIsRequired("optionalDate") || checkIsRequired("optionalTime")
-        }
-        datePickerProps={{
-          ...register("optionalDate"),
-          error: errors.optionalDate?.message,
-        }}
-        timePickerProps={{
-          ...register("optionalTime"),
-          error: errors.optionalTime?.message,
-        }}
+        required={checkIsRequired("optionalDatetime")}
+        error={errors.optionalDatetime?.message}
+        {...register("optionalDatetime")}
       />
       <Controller
         name="phoneNumber"

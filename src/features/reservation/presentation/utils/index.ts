@@ -6,15 +6,12 @@ export const mapToReservation = (
   formData: ReservationFormData
 ): CreateReservation => {
   const reservationDatetime =
-    DateTime.fromISO(
-      `${formData.reservationDate}T${formData.reservationTime}`,
-      { zone: "Asia/Jakarta" }
-    )
+    DateTime.fromISO(formData.reservationDatetime, { zone: "Asia/Jakarta" })
       .toUTC()
       .toISO() ?? "";
 
   const optionalDatetime =
-    DateTime.fromISO(`${formData.optionalDate}T${formData.optionalTime}`, {
+    DateTime.fromISO(formData.optionalDatetime ?? "", {
       zone: "Asia/Jakarta",
     })
       .toUTC()

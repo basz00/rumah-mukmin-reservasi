@@ -19,10 +19,8 @@ export const reservationSchema = z.object({
   reservationServices: z
     .array(z.string())
     .min(1, { message: "Bagian ini diperlukan" }),
-  reservationDate: z.string().min(1, { message: "Bagian ini diperlukan" }),
-  reservationTime: z.string().min(1, { message: "Bagian ini diperlukan" }),
-  optionalDate: z.string().optional(),
-  optionalTime: z.string().optional(),
+  reservationDatetime: z.string().min(1, { message: "Bagian ini diperlukan" }),
+  optionalDatetime: z.string().optional(),
   phoneNumber: z.string().optional(),
 });
 
