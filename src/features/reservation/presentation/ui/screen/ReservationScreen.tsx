@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Form from "../components/Form";
+import { Form } from "@/reservation/presentation/ui/components";
 
 const ScreenContainer = styled.div`
   display: flex;

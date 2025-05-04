@@ -1,4 +1,4 @@
-import { Input } from "..";
+import Input from "./Input";
 
 type Props = {
   hasError?: boolean;

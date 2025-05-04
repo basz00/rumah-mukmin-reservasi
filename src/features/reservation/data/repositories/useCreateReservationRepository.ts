@@ -1,4 +1,4 @@
-import { useCreateReservationDataSource } from "../datasources/useCreateReservationDataSource";
+import { useCreateReservationDataSource } from "@/reservation/data/datasources";
 
 export const useCreateReservationRepository = () => {
   const { execute, error, isSuccess, loading } =

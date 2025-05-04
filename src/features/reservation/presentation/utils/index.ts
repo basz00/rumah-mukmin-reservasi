@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
-import { CreateReservation } from "../../common/entities";
-import { ReservationFormData } from "../entity/reservation";
+import { CreateReservation } from "@/reservation/common/entities";
+import { ReservationFormData } from "@/reservation/presentation/entity";
 
 export const mapToReservation = (
   formData: ReservationFormData

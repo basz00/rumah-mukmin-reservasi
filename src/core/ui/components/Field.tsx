@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { Error, Hint, Label } from "..";
 import RequiredLabel from "./RequiredLabel";
+import Label from "./Label";
+import Hint from "./Hint";
+import Error from "./Error";
 
 const Container = styled.div`
   width: auto;

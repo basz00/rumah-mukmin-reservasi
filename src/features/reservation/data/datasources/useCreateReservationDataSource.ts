@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { CreateReservation } from "../../common/entities";
+import { CreateReservation } from "@/reservation/common/entities";
 import { CREATE_RESERVATION } from "./queries/createReservation";
 
 export const useCreateReservationDataSource = () => {

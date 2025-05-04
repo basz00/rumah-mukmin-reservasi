@@ -8,13 +8,13 @@ import {
   PhoneField,
   RadioGroup,
   TextInputField,
-} from "../../../../../core/ui";
+} from "@/components";
 import {
   ReservationFormData,
   reservationSchema,
-} from "../../entity/reservation";
-import { mapToReservation } from "../../utils";
-import { useCreateReservationRepository } from "../../../data/repositories";
+} from "@/reservation/presentation/entity";
+import { mapToReservation } from "@/reservation/presentation/utils";
+import { useCreateReservationRepository } from "@/reservation/data/repositories";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 

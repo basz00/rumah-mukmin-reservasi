@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Input } from "..";
 import Field from "./Field";
+import Input from "./Input";
 
 const Container = styled.div`
   width: auto;
