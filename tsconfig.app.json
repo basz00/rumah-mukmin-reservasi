@@ -24,7 +24,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/components": ["core/ui/components/"],
-      "@/reservation/*": ["features/reservation/*"]
+      "@/reservation/*": ["features/reservation/*"],
+      "@/graphql": ["graphql"]
     }
   },
   "include": ["src"]

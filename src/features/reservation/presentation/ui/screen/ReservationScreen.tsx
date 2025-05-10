@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Form } from "@/reservation/presentation/ui/components";
+import { Button } from "@/components";
+import { Settings } from "lucide-react";
+import { useHostState } from "@/reservation/common/config";
 
 const ScreenContainer = styled.div`
   display: flex;
@@ -45,9 +48,27 @@ const Img = styled.img`
 `;
 
 const ReservationScreen = () => {
+  const { hostUrl, setHostUrl } = useHostState();
+
+  const showHostUrlDialog = () => {
+    const result = prompt("Please enter your host url", hostUrl);
+    if (result) {
+      setHostUrl(result);
+    }
+  };
+
   return (
     <ScreenContainer>
       <ContentContainer>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            style={{ display: "flex", alignItems: "center", gap: "6px" }}
+            onClick={showHostUrlDialog}
+          >
+            <Settings />
+            <span>Settings</span>
+          </Button>
+        </div>
         <H1>Assalamualaykum warahmatullahi wabarakatuh</H1>
         <P>
           berikut ini adalah formulir isian pendaftaran reservasi anda di Rumah
