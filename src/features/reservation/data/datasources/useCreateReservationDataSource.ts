@@ -8,7 +8,11 @@ export const useCreateReservationDataSource = () => {
   const isSuccess = !error && !loading && !!data;
 
   const execute = (reservation: CreateReservation) => {
-    createReservation({ variables: { createReservationInput: reservation } });
+    createReservation({
+      variables: { createReservationInput: reservation },
+    }).catch((e) => {
+      console.error(e);
+    });
   };
 
   return {

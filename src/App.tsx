@@ -10,8 +10,10 @@ function App() {
   return (
     <>
       <ApolloProvider client={createApolloClient(hostUrl)}>
-        <ReservationScreen />
-        <Toaster />
+        <div className="w-screen h-full bg-gray-100">
+          <ReservationScreen />
+          <Toaster />
+        </div>
       </ApolloProvider>
     </>
   );

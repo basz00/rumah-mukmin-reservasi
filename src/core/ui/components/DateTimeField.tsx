@@ -1,14 +1,6 @@
 import { DateTime } from "luxon";
-import styled from "styled-components";
 import Field from "./Field";
 import Input from "./Input";
-
-const DateTimeContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 16px;
-`;
 
 type Props = {
   label?: string;
@@ -22,20 +14,24 @@ const DateTimeField = ({ label, hint, required, error, ...rest }: Props) => {
   const todayDate = DateTime.now().toUTC().toFormat("yyyy-MM-dd'T'HH:mm");
   return (
     <Field label={label} hint={hint} error={error} required={required}>
-      <DateTimeContainer>
+      <div className="flex flex-wrap gap-4">
         <Input
           type="datetime-local"
           onFocus={(e) => e.target.showPicker && e.target.showPicker()}
           onClick={(e) => {
-            if (e.target instanceof HTMLInputElement && e.target.showPicker) {
-              e.target.showPicker();
+            try {
+              if (e.target instanceof HTMLInputElement && e.target.showPicker) {
+                e.target.showPicker();
+              }
+            } catch (e) {
+              console.error(e);
             }
           }}
           {...rest}
           min={todayDate}
           hasError={hasError}
         />
-      </DateTimeContainer>
+      </div>
     </Field>
   );
 };

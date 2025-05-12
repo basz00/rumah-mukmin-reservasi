@@ -20,6 +20,7 @@ const PhoneField = ({ label, hint, error, required, ...rest }: Props) => {
         buttonStyle={{
           color: "black",
         }}
+        inputClass="min-w-0 max-w-full w-full sm:w-auto"
         {...rest}
       />
     </Field>

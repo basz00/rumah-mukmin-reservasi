@@ -1,13 +1,4 @@
-import styled from "styled-components";
-import Checkbox from "./Checkbox";
-import Field from "../Field";
-
-const RadioContainer = styled.div`
-  gap: 8px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
+import Field from "./Field";
 
 type FormProps = {
   formId: string;
@@ -31,13 +22,19 @@ const CheckboxGroup = ({
 }: Props) => {
   const renderRadios = () => {
     return formProps.map(({ formId, formLabel }) => (
-      <Checkbox id={formId} label={formLabel} {...rest} />
+      <label
+        key={formId}
+        className="text-[14px] text-gray-700 flex items-center"
+      >
+        <input value={formId} type="checkbox" className="mr-2" {...rest} />
+        {formLabel}
+      </label>
     ));
   };
 
   return (
     <Field label={label} hint={hint} error={error} required={required}>
-      <RadioContainer>{renderRadios()}</RadioContainer>
+      <div className="flex flex-wrap gap-2">{renderRadios()}</div>
     </Field>
   );
 };

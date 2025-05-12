@@ -1,21 +1,5 @@
 import { ReactNode } from "react";
-import styled from "styled-components";
 import RequiredLabel from "./RequiredLabel";
-import Label from "./Label";
-import Hint from "./Hint";
-import Error from "./Error";
-
-const Container = styled.div`
-  width: auto;
-  display: flex;
-  flex-direction: column;
-`;
-
-const LabelContainer = styled.div`
-  width: auto;
-  display: flex;
-  gap: 4px;
-`;
 
 type Props = {
   label?: string;
@@ -31,32 +15,44 @@ const Field = ({ label, hint, required, error, children }: Props) => {
       if (required) {
         return <RequiredLabel label={label} />;
       }
-      return <Label>{label}</Label>;
+      return (
+        <h5 className="text-[13px] text-black m-0 whitespace-normal break-words">
+          {label}
+        </h5>
+      );
     }
     return null;
   };
 
   const renderHint = () => {
     if (hint) {
-      return <Hint>{hint}</Hint>;
+      return (
+        <h5 className="text-[13px] text-gray-500 m-0 whitespace-normal break-words">
+          {hint}
+        </h5>
+      );
     }
     return null;
   };
 
   const renderError = () => {
     if (error) {
-      return <Error>{error}</Error>;
+      return (
+        <h5 className="text-[13px] text-red-500 m-0 whitespace-normal break-words">
+          {error}
+        </h5>
+      );
     }
     return null;
   };
 
   return (
-    <Container>
-      <LabelContainer>{renderLabel()}</LabelContainer>
+    <div className="w-auto flex flex-col">
+      <div className="w-auto flex gap-1">{renderLabel()}</div>
       {children}
       {renderError()}
       {renderHint()}
-    </Container>
+    </div>
   );
 };
 

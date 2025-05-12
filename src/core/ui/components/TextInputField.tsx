@@ -1,12 +1,6 @@
-import styled from "styled-components";
 import Field from "./Field";
 import Input from "./Input";
 
-const Container = styled.div`
-  width: auto;
-  display: flex;
-  flex-direction: column;
-`;
 type Props = {
   label?: string;
   hint?: string;
@@ -18,9 +12,9 @@ const TextInputField = ({ label, hint, error, required, ...rest }: Props) => {
 
   return (
     <Field label={label} hint={hint} error={error} required={required}>
-      <Container>
+      <div className="w-auto flex flex-col">
         <Input hasError={hasError} {...rest} />
-      </Container>
+      </div>
     </Field>
   );
 };

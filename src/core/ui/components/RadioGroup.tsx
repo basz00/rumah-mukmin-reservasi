@@ -1,13 +1,5 @@
 import React from "react";
-import Field from "../Field";
-import Radio from "./Radio";
-import styled from "styled-components";
-
-const RadioContainer = styled.div`
-  gap: 8px;
-  display: flex;
-  flex-direction: column;
-`;
+import Field from "./Field";
 
 type FormProps = {
   formId: string;
@@ -32,13 +24,22 @@ const RadioGroup = ({
   const renderRadios = () => {
     return formProps.map((props) => {
       const { formId, formLabel } = props;
-      return <Radio id={formId} label={formLabel} {...rest} />;
+
+      return (
+        <label
+          key={formId}
+          className="text-[14px] text-gray-700 flex items-center"
+        >
+          <input type="radio" value={formId} className="mr-2" {...rest} />
+          {formLabel}
+        </label>
+      );
     });
   };
 
   return (
     <Field label={label} hint={hint} error={error} required={required}>
-      <RadioContainer>{renderRadios()}</RadioContainer>
+      <div className="flex flex-col gap-1">{renderRadios()}</div>
     </Field>
   );
 };

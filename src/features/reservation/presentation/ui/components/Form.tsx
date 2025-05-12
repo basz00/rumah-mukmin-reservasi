@@ -1,6 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import styled from "styled-components";
 import {
   Button,
   CheckboxGroup,
@@ -9,22 +6,17 @@ import {
   RadioGroup,
   TextInputField,
 } from "@/components";
+import { useCreateReservationRepository } from "@/reservation/data/repositories";
 import {
   ReservationFormData,
   reservationSchema,
 } from "@/reservation/presentation/entity";
 import { mapToReservation } from "@/reservation/presentation/utils";
-import { useCreateReservationRepository } from "@/reservation/data/repositories";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { mapError } from "core/error";
 import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-
-const StyledForm = styled.form`
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 0 12px;
-  gap: 32px;
-`;
 
 const Form = () => {
   const {
@@ -38,6 +30,7 @@ const Form = () => {
       gender: "",
       registrationCategory: "",
       reservationServices: [],
+      phoneNumber: "",
     },
   });
   const { execute, isSuccess, loading, error } =
@@ -60,7 +53,7 @@ const Form = () => {
     }
 
     if (error) {
-      toast.error("Reservasi anda gagal", {
+      toast.error(mapError(error.cause?.extensions.code), {
         position: "bottom-center",
       });
       return;
@@ -72,18 +65,11 @@ const Form = () => {
   };
 
   return (
-    <StyledForm
+    <form
       onSubmit={handleSubmit((data) => {
-        console.log(
-          `ori: rdt[${data.reservationDatetime}]} odt[${data.optionalDatetime}]`
-        );
         execute(mapToReservation(data));
-        console.log(
-          `new: rdt[${mapToReservation(data).reservationDatetime}]} odt[${
-            mapToReservation(data).optionalDatetime
-          }]`
-        );
       })}
+      className="w-auto flex flex-col px-3 gap-8"
     >
       <TextInputField
         label="Nama"
@@ -205,12 +191,12 @@ const Form = () => {
             formLabel: "Terapi Gurah Hidung",
           },
           {
-            formId: "ACCUPUNCTURE",
-            formLabel: "Accupuncture",
+            formId: "ACUPUNCTURE",
+            formLabel: "Acupuncture",
           },
           {
             formId: "ACUPRESSURE",
-            formLabel: "Accupressure",
+            formLabel: "Acupressure",
           },
           {
             formId: "EYE_GURAH_THERAPY",
@@ -230,7 +216,7 @@ const Form = () => {
           },
           {
             formId: "LEARNING_TRAINING",
-            formLabel: "Belanja Herba",
+            formLabel: "Belajar/Pelatihan",
           },
         ]}
         error={errors.reservationServices?.message}
@@ -260,13 +246,14 @@ const Form = () => {
             hint="+62 adalah kode negara Indonesia pengganti angka 0 - +62812345xxxx"
             error={errors.phoneNumber?.message}
             required={checkIsRequired("phoneNumber")}
-            {...field}
+            inputProps={{ ...field }}
           />
         )}
       />
-
-      <Button type="submit">Submit</Button>
-    </StyledForm>
+      <div className="items-start">
+        <Button type="submit">Submit</Button>
+      </div>
+    </form>
   );
 };
 
