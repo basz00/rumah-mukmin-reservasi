@@ -1,15 +1,12 @@
-import { ApolloProvider } from "@apollo/client";
-import { ReservationScreen } from "./features/reservation/presentation";
-import { Toaster } from "react-hot-toast";
 import createApolloClient from "@/graphql";
-import { useHostState } from "@/reservation/common/config";
+import { ApolloProvider } from "@apollo/client";
+import { Toaster } from "react-hot-toast";
+import { ReservationScreen } from "./features/reservation/presentation";
 
 function App() {
-  const { hostUrl } = useHostState();
-
   return (
     <>
-      <ApolloProvider client={createApolloClient(hostUrl)}>
+      <ApolloProvider client={createApolloClient()}>
         <div className="w-screen h-full bg-gray-100">
           <ReservationScreen />
           <Toaster />

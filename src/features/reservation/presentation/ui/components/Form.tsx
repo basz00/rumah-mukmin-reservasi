@@ -251,7 +251,9 @@ const Form = () => {
         )}
       />
       <div className="items-start">
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={loading}>
+          Submit
+        </Button>
       </div>
     </form>
   );

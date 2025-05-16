@@ -1,25 +1,9 @@
-import { Button } from "@/components";
-import { useHostState } from "@/reservation/common/config";
 import { Form } from "@/reservation/presentation/ui/components";
-import { Settings } from "lucide-react";
 
 const ReservationScreen = () => {
-  const { hostUrl, setHostUrl } = useHostState();
-
-  const showHostUrlDialog = () => {
-    const result = prompt("Please enter your host url", hostUrl);
-    if (result) {
-      setHostUrl(result);
-    }
-  };
-
   return (
     <div className="flex justify-center h-full p-0 sm:p-20">
       <div className="flex flex-col w-full justify-center border-2 border-solid border-[#f0f0f3] bg-white p-5 pt-8 sm:p-6 max-w-[700px] rounded-md">
-        <Button onClick={showHostUrlDialog} type="button">
-          <Settings />
-          <span>Settings</span>
-        </Button>
         <h1 className="text-2xl text-black font-bold break-words whitespace-normal">
           Assalamualaykum warahmatullahi wabarakatuh
         </h1>
