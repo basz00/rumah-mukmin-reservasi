@@ -53,7 +53,7 @@ const Form = () => {
     }
 
     if (error) {
-      toast.error(mapError(error.cause?.extensions.code), {
+      toast.error(mapError(error?.cause?.extensions?.code), {
         position: "bottom-center",
       });
       return;
